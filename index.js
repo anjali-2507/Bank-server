@@ -14,7 +14,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'https://bank-client-one.vercel.app/login',
+    origin: 'https://bank-client-one.vercel.app',
 }));
 app.use(express.json());
 
