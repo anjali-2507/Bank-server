@@ -1,3 +1,6 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const config = require('./config/config');
@@ -10,7 +13,9 @@ const testRoutes = require('./routes/test');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'https://bank-client-one.vercel.app/login',
+}));
 app.use(express.json());
 
 // Routes
@@ -25,7 +30,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
-const PORT = config.port;
+const PORT = config.port || process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
